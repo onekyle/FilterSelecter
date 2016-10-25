@@ -13,6 +13,8 @@
 		13223DB31DBF411800207ADD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 13223DB11DBF411800207ADD /* Main.storyboard */; };
 		13223DB51DBF411800207ADD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13223DB41DBF411800207ADD /* Assets.xcassets */; };
 		13223DB81DBF411800207ADD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 13223DB61DBF411800207ADD /* LaunchScreen.storyboard */; };
+		13223DC71DBF464100207ADD /* YCFilterSelecterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 13223DC61DBF464100207ADD /* YCFilterSelecterView.m */; };
+		13223DCA1DBF4D0900207ADD /* YCFiltesCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 13223DC91DBF4D0900207ADD /* YCFiltesCollectionViewCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +28,11 @@
 		13223DB41DBF411800207ADD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		13223DB71DBF411800207ADD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		13223DB91DBF411800207ADD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		13223DC51DBF464100207ADD /* YCFilterSelecterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YCFilterSelecterView.h; sourceTree = "<group>"; };
+		13223DC61DBF464100207ADD /* YCFilterSelecterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YCFilterSelecterView.m; sourceTree = "<group>"; };
+		13223DC81DBF4D0900207ADD /* YCFiltesCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YCFiltesCollectionViewCell.h; sourceTree = "<group>"; };
+		13223DC91DBF4D0900207ADD /* YCFiltesCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YCFiltesCollectionViewCell.m; sourceTree = "<group>"; };
+		13223DCB1DBF540200207ADD /* filterPCH.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = filterPCH.pch; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,6 +69,10 @@
 				13223DAC1DBF411800207ADD /* AppDelegate.m */,
 				13223DAE1DBF411800207ADD /* ViewController.h */,
 				13223DAF1DBF411800207ADD /* ViewController.m */,
+				13223DC51DBF464100207ADD /* YCFilterSelecterView.h */,
+				13223DC61DBF464100207ADD /* YCFilterSelecterView.m */,
+				13223DC81DBF4D0900207ADD /* YCFiltesCollectionViewCell.h */,
+				13223DC91DBF4D0900207ADD /* YCFiltesCollectionViewCell.m */,
 				13223DB11DBF411800207ADD /* Main.storyboard */,
 				13223DB41DBF411800207ADD /* Assets.xcassets */,
 				13223DB61DBF411800207ADD /* LaunchScreen.storyboard */,
@@ -75,6 +86,7 @@
 			isa = PBXGroup;
 			children = (
 				13223DA91DBF411800207ADD /* main.m */,
+				13223DCB1DBF540200207ADD /* filterPCH.pch */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -110,6 +122,7 @@
 				TargetAttributes = {
 					13223DA41DBF411800207ADD = {
 						CreatedOnToolsVersion = 7.3.1;
+						DevelopmentTeam = MAJ37PQSZL;
 					};
 				};
 			};
@@ -150,6 +163,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				13223DB01DBF411800207ADD /* ViewController.m in Sources */,
+				13223DC71DBF464100207ADD /* YCFilterSelecterView.m in Sources */,
+				13223DCA1DBF4D0900207ADD /* YCFiltesCollectionViewCell.m in Sources */,
 				13223DAD1DBF411800207ADD /* AppDelegate.m in Sources */,
 				13223DAA1DBF411800207ADD /* main.m in Sources */,
 			);
@@ -265,6 +280,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(PROJECT)/filterPCH.pch";
 				INFOPLIST_FILE = FilterSelecter/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.Durand.FilterSelecter;
@@ -276,6 +294,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(PROJECT)/filterPCH.pch";
 				INFOPLIST_FILE = FilterSelecter/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.Durand.FilterSelecter;
@@ -302,6 +323,7 @@
 				13223DBE1DBF411800207ADD /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

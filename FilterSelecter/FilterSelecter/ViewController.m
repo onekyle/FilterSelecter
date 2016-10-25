@@ -7,21 +7,41 @@
 //
 
 #import "ViewController.h"
-
+#import "YCFilterSelecterView.h"
 @interface ViewController ()
-
+@property (nonatomic,strong) YCFilterSelecterView *flterView;
 @end
 
 @implementation ViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view, typically from a nib.
+    
+    UIButton *btn = ({
+        btn = [UIButton new];
+        [btn setTitle:@"showFilter" forState:UIControlStateNormal];
+        [btn setTitleColor:[UIColor orangeColor] forState:UIControlStateNormal];
+        [btn addTarget:self action:@selector(showFilter) forControlEvents:UIControlEventTouchUpInside];
+        btn.frame = CGRectMake(150, 100, 100, 50);
+        [self.view addSubview:btn];
+        btn;
+    });
+    
+    _flterView = ({
+        UICollectionViewFlowLayout *flowLayout = [UICollectionViewFlowLayout alloc];
+        flowLayout.itemSize = CGSizeMake(kCollectionViewWidth, kCollectionViewHeight);
+        flowLayout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
+        _flterView = [[YCFilterSelecterView alloc] init];
+        _flterView.frame = CGRectMake(0, self.view.frame.size.height - kCollectionViewHeight, kCollectionViewWidth, kCollectionViewHeight);
+        [self.view addSubview:_flterView];
+        _flterView;
+    });
+    
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+- (void)showFilter
+{
+    
 }
 
 @end

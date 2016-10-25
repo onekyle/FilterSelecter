@@ -1,0 +1,20 @@
+//
+//  filterPCH.pch
+//  FilterSelecter
+//
+//  Created by Durand on 25/10/16.
+//  Copyright © 2016年 com.Durand. All rights reserved.
+//
+
+#ifndef filterPCH_pch
+#define filterPCH_pch
+
+
+
+#define kCollectionViewWidth ([UIScreen mainScreen].bounds.size.width)
+#define kCollectionViewHeight (kCollectionViewWidth / 375 * 120)
+#define kFilterCollectionViewCellSize (60)
+// Include any system framework and library headers here that should be included in all compilation units.
+// You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
+
+#endif /* filterPCH_pch */
