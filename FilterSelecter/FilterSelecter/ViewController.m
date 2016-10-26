@@ -41,7 +41,13 @@
 
 - (void)showFilter
 {
-    
+    NSArray *array = @[
+                       @{@"CellTitle": @"滤镜", @"userDefaultKeyName": @"LvJing"},
+                       @{@"CellTitle": @"嫩肤", @"userDefaultKeyName": @"NenFu"},
+                       @{@"CellTitle": @"大眼", @"userDefaultKeyName": @"DaYan"},
+                       @{@"CellTitle": @"瘦脸", @"userDefaultKeyName": @"ShouLian"}
+                       ];
+    _flterView.dataSourceArray = array;
 }
 
 @end

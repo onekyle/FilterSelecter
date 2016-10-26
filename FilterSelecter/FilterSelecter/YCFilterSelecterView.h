@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface YCFilterSelecterView : UICollectionView
-
+@property (nonatomic,copy) NSArray *dataSourceArray;
 @end

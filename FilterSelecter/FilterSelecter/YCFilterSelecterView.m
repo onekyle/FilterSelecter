@@ -8,13 +8,14 @@
 
 #import "YCFilterSelecterView.h"
 
-#import "YCFiltesCollectionViewCell.h"
+#import "YCFiltersCollectionViewCell.h"
+#import "YCBeautyFilterCollectionViewCell.h"
 
-#define kCollectionViewWidth ([UIScreen mainScreen].bounds.size.width)
-#define kCollectionViewHeight (kCollectionViewWidth / 375 * 120)
 
 static NSString *testCellID = @"testCellID";
 static NSString *YCFiltersCollectionviewCellID = @"YCFiltersCollectionviewCellID";
+static NSString *YCBeautyFilterCollectionViewCellID = @"YCBeautyFilterCollectionViewCellID";
+
 @interface YCFilterSelecterView () <UICollectionViewDelegate,UICollectionViewDataSource>
 
 @end
@@ -35,8 +36,11 @@ static NSString *YCFiltersCollectionviewCellID = @"YCFiltersCollectionviewCellID
     self.showsHorizontalScrollIndicator = NO;
     self.dataSource = self;
     self.delegate = self;
+    self.backgroundColor = [UIColor darkGrayColor];
     [self registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:testCellID];
-    [self registerClass:[YCFiltesCollectionViewCell class] forCellWithReuseIdentifier:YCFiltersCollectionviewCellID];
+    [self registerClass:[YCFiltersCollectionViewCell class] forCellWithReuseIdentifier:YCFiltersCollectionviewCellID];
+    [self registerClass:[YCBeautyFilterCollectionViewCell class] forCellWithReuseIdentifier:YCBeautyFilterCollectionViewCellID];
+
     
     return self;
 }
@@ -48,32 +52,34 @@ static NSString *YCFiltersCollectionviewCellID = @"YCFiltersCollectionviewCellID
 }
 */
 
-#pragma mark -delegate
--(void)collectionView:(UICollectionView *)collectionView willDisplayCell:(UICollectionViewCell *)cell forItemAtIndexPath:(NSIndexPath *)indexPath
+-(void)setDataSourceArray:(NSArray *)dataSourceArray
 {
-    
+    _dataSourceArray = dataSourceArray;
+    [self reloadData];
 }
+#pragma mark -delegate
+//-(void)collectionView:(UICollectionView *)collectionView willDisplayCell:(UICollectionViewCell *)cell forItemAtIndexPath:(NSIndexPath *)indexPath
+//{
+//    
+//}
 
 #pragma mark - datasource
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    return 4;
+    return _dataSourceArray.count;
 }
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSString *reuserID = indexPath.item ? testCellID : YCFiltersCollectionviewCellID;
+    NSString *reuserID = indexPath.item ? YCBeautyFilterCollectionViewCellID : YCFiltersCollectionviewCellID;
     UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:reuserID forIndexPath:indexPath];
-    cell.backgroundColor = [self randomColor];
+    if (indexPath.item) {
+        ((YCBeautyFilterCollectionViewCell *) cell).dataDict = _dataSourceArray[indexPath.item];
+    }
+    else
+    {
+        ((YCFiltersCollectionViewCell *) cell).dataDict = _dataSourceArray[indexPath.item];
+    }
     return cell;
-}
-
-
--(UIColor *)randomColor
-{
-    CGFloat r  = (arc4random() % 256) / 255.0;
-    CGFloat g = (arc4random() % 256) / 255.0;
-    CGFloat b = (arc4random() % 256) / 255.0;
-    return [UIColor colorWithRed:r green:g blue:b alpha:1.0];
 }
 
 

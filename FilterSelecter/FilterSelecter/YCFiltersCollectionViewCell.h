@@ -1,5 +1,5 @@
 //
-//  YCFiltesCollectionViewCell.h
+//  YCFiltersCollectionViewCell.h
 //  FilterSelecter
 //
 //  Created by Durand on 25/10/16.
@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface YCFiltesCollectionViewCell : UICollectionViewCell
-
+@interface YCFiltersCollectionViewCell : UICollectionViewCell
+@property (nonatomic,copy) NSDictionary *dataDict;
 @end

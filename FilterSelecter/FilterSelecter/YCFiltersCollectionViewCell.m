@@ -1,12 +1,12 @@
 //
-//  YCFiltesCollectionViewCell.m
+//  YCFiltersCollectionViewCell.m
 //  FilterSelecter
 //
 //  Created by Durand on 25/10/16.
 //  Copyright © 2016年 com.Durand. All rights reserved.
 //
 
-#import "YCFiltesCollectionViewCell.h"
+#import "YCFiltersCollectionViewCell.h"
 
 @interface YCSingleFilterCell : UICollectionViewCell
 @property (nonatomic,copy) NSString *filterName;
@@ -79,6 +79,7 @@ static NSString *YCSingleFilterCellID = @"YCSingleFilterCellID";
 
 @interface YCFiltersCollectionView : UICollectionView <UICollectionViewDataSource,UICollectionViewDelegate>
 @property (nonatomic,assign) NSUInteger currentIndex;
+@property (nonatomic,copy) NSString *userDefaultKeyName;
 @end
 
 @implementation YCFiltersCollectionView
@@ -105,7 +106,7 @@ static NSString *YCSingleFilterCellID = @"YCSingleFilterCellID";
     currentCell.selected = YES;
     oldCell.selected = NO;
     [collectionView scrollToItemAtIndexPath:indexPath atScrollPosition:UICollectionViewScrollPositionCenteredHorizontally animated:YES];
-    
+    [[NSUserDefaults standardUserDefaults] setInteger:indexPath.item forKey:_userDefaultKeyName];
 }
 
 #pragma mark - datasource
@@ -124,23 +125,40 @@ static NSString *YCSingleFilterCellID = @"YCSingleFilterCellID";
 
 @end
 
-@interface YCFiltesCollectionViewCell ()
+@interface YCFiltersCollectionViewCell ()
+@property (nonatomic,strong) UILabel *titleLabel;
 @property (nonatomic,strong) YCFiltersCollectionView *filtesCollectionView;
+@property (nonatomic,copy) NSString *userDefaultKeyName;
 @end
 
-@implementation YCFiltesCollectionViewCell
+@implementation YCFiltersCollectionViewCell
 
 - (instancetype)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
     if (self) {
+        
+        CGFloat w,h;
+        w = frame.size.width;
+        h = frame.size.height;
+        _titleLabel = ({
+            CGFloat labelW = 100;
+            UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake((w - labelW) / 2, 10, labelW, 16)];
+            titleLabel.textColor = [UIColor colorWithWhite:1.0 alpha:0.7];
+            titleLabel.font = [UIFont systemFontOfSize:14];
+            titleLabel.textAlignment = NSTextAlignmentCenter;
+            titleLabel;
+        });
+        [self.contentView addSubview:_titleLabel];
+        
+        
         UICollectionViewFlowLayout *flowLayout = [UICollectionViewFlowLayout alloc];
         flowLayout.itemSize = CGSizeMake(60, 90);
         flowLayout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
         flowLayout.minimumInteritemSpacing = 0;
         flowLayout.minimumLineSpacing = 5;
         
-        _filtesCollectionView = [[YCFiltersCollectionView alloc] initWithFrame:CGRectMake(0, 35, kCollectionViewWidth, 90) collectionViewLayout:flowLayout];
+        _filtesCollectionView = [[YCFiltersCollectionView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(_titleLabel.frame) + 10, kCollectionViewWidth, 90) collectionViewLayout:flowLayout];
         _filtesCollectionView.contentInset = UIEdgeInsetsMake(0, 15, 0, 15);
         _filtesCollectionView.pagingEnabled = NO;
         _filtesCollectionView.bounces = NO;
@@ -151,5 +169,16 @@ static NSString *YCSingleFilterCellID = @"YCSingleFilterCellID";
     return self;
 }
 
+-(void)setDataDict:(NSDictionary *)dataDict
+{
+    _dataDict = dataDict;
+    _userDefaultKeyName = dataDict[@"userDefaultKeyName"];
+    if (_userDefaultKeyName) {
+        _filtesCollectionView.userDefaultKeyName = _userDefaultKeyName;
+        NSInteger tag = [[NSUserDefaults standardUserDefaults] integerForKey:_userDefaultKeyName];
+        [_filtesCollectionView selectItemAtIndexPath:[NSIndexPath indexPathForItem:tag inSection:0] animated:NO scrollPosition:UICollectionViewScrollPositionNone];
+    }
+    _titleLabel.text = dataDict[@"CellTitle"];
+}
 
 @end

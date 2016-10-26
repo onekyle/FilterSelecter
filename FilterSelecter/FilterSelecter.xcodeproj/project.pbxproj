@@ -14,7 +14,8 @@
 		13223DB51DBF411800207ADD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13223DB41DBF411800207ADD /* Assets.xcassets */; };
 		13223DB81DBF411800207ADD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 13223DB61DBF411800207ADD /* LaunchScreen.storyboard */; };
 		13223DC71DBF464100207ADD /* YCFilterSelecterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 13223DC61DBF464100207ADD /* YCFilterSelecterView.m */; };
-		13223DCA1DBF4D0900207ADD /* YCFiltesCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 13223DC91DBF4D0900207ADD /* YCFiltesCollectionViewCell.m */; };
+		13223DCE1DC04B1B00207ADD /* YCBeautyFilterCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 13223DCD1DC04B1B00207ADD /* YCBeautyFilterCollectionViewCell.m */; };
+		13223DD11DC05A6900207ADD /* YCFiltersCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 13223DD01DC05A6900207ADD /* YCFiltersCollectionViewCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,9 +31,11 @@
 		13223DB91DBF411800207ADD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		13223DC51DBF464100207ADD /* YCFilterSelecterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YCFilterSelecterView.h; sourceTree = "<group>"; };
 		13223DC61DBF464100207ADD /* YCFilterSelecterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YCFilterSelecterView.m; sourceTree = "<group>"; };
-		13223DC81DBF4D0900207ADD /* YCFiltesCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YCFiltesCollectionViewCell.h; sourceTree = "<group>"; };
-		13223DC91DBF4D0900207ADD /* YCFiltesCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YCFiltesCollectionViewCell.m; sourceTree = "<group>"; };
 		13223DCB1DBF540200207ADD /* filterPCH.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = filterPCH.pch; sourceTree = "<group>"; };
+		13223DCC1DC04B1B00207ADD /* YCBeautyFilterCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YCBeautyFilterCollectionViewCell.h; sourceTree = "<group>"; };
+		13223DCD1DC04B1B00207ADD /* YCBeautyFilterCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YCBeautyFilterCollectionViewCell.m; sourceTree = "<group>"; };
+		13223DCF1DC05A6900207ADD /* YCFiltersCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YCFiltersCollectionViewCell.h; sourceTree = "<group>"; };
+		13223DD01DC05A6900207ADD /* YCFiltersCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YCFiltersCollectionViewCell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -71,8 +74,10 @@
 				13223DAF1DBF411800207ADD /* ViewController.m */,
 				13223DC51DBF464100207ADD /* YCFilterSelecterView.h */,
 				13223DC61DBF464100207ADD /* YCFilterSelecterView.m */,
-				13223DC81DBF4D0900207ADD /* YCFiltesCollectionViewCell.h */,
-				13223DC91DBF4D0900207ADD /* YCFiltesCollectionViewCell.m */,
+				13223DCF1DC05A6900207ADD /* YCFiltersCollectionViewCell.h */,
+				13223DD01DC05A6900207ADD /* YCFiltersCollectionViewCell.m */,
+				13223DCC1DC04B1B00207ADD /* YCBeautyFilterCollectionViewCell.h */,
+				13223DCD1DC04B1B00207ADD /* YCBeautyFilterCollectionViewCell.m */,
 				13223DB11DBF411800207ADD /* Main.storyboard */,
 				13223DB41DBF411800207ADD /* Assets.xcassets */,
 				13223DB61DBF411800207ADD /* LaunchScreen.storyboard */,
@@ -164,8 +169,9 @@
 			files = (
 				13223DB01DBF411800207ADD /* ViewController.m in Sources */,
 				13223DC71DBF464100207ADD /* YCFilterSelecterView.m in Sources */,
-				13223DCA1DBF4D0900207ADD /* YCFiltesCollectionViewCell.m in Sources */,
+				13223DD11DC05A6900207ADD /* YCFiltersCollectionViewCell.m in Sources */,
 				13223DAD1DBF411800207ADD /* AppDelegate.m in Sources */,
+				13223DCE1DC04B1B00207ADD /* YCBeautyFilterCollectionViewCell.m in Sources */,
 				13223DAA1DBF411800207ADD /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
