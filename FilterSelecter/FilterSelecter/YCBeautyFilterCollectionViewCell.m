@@ -34,17 +34,21 @@
     CGFloat btnWH = 50;
     CGFloat btnGap = ((w - 2 * 15) - 50 * kLevelCount) / (kLevelCount - 1);
     CGFloat btnY = CGRectGetMaxY(_titleLabel.frame) + 20;
+    UIImage *normalImg = [UIImage imageNamed:@"Oval"];
+    UIImage *selectedImg = [UIImage imageNamed:@"Oval_selected"];
     for (int i = 0; i < kLevelCount; i ++) {
         UIButton *btn = ({
             btn = [[UIButton alloc] initWithFrame:CGRectMake(sideMargin + i * (btnWH + btnGap), btnY, btnWH, btnWH)];
             btn.tag = 1000 + i;
-            btn.layer.cornerRadius = btnWH / 2;
-            btn.layer.borderWidth = 1;
-            btn.layer.borderColor = PEACHBLOWCOLOR.CGColor;
-            btn.layer.masksToBounds = YES;
+//            btn.layer.cornerRadius = btnWH / 2;
+//            btn.layer.borderWidth = 1;
+//            btn.layer.borderColor = PEACHBLOWCOLOR.CGColor;
+//            btn.layer.masksToBounds = YES;
             [btn setTitle:[NSString stringWithFormat:@"%d",i] forState:UIControlStateNormal];
             [btn setTitleColor:PEACHBLOWCOLOR forState:UIControlStateNormal];
             [btn setTitleColor:[UIColor whiteColor] forState:UIControlStateSelected];
+            [btn setBackgroundImage:normalImg forState:UIControlStateNormal];
+            [btn setBackgroundImage:selectedImg forState:UIControlStateSelected];
             btn.titleLabel.font = [UIFont systemFontOfSize:18];
             [btn addTarget:self action:@selector(didClickBeutyFilter:) forControlEvents:UIControlEventTouchUpInside];
             btn;

@@ -36,7 +36,7 @@ static NSString *YCBeautyFilterCollectionViewCellID = @"YCBeautyFilterCollection
     self.showsHorizontalScrollIndicator = NO;
     self.dataSource = self;
     self.delegate = self;
-    self.backgroundColor = [UIColor darkGrayColor];
+    self.backgroundColor = [UIColor clearColor];
     [self registerClass:[YCFiltersCollectionViewCell class] forCellWithReuseIdentifier:YCFiltersCollectionviewCellID];
     [self registerClass:[YCBeautyFilterCollectionViewCell class] forCellWithReuseIdentifier:YCBeautyFilterCollectionViewCellID];
 

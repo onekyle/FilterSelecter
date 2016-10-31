@@ -11,6 +11,8 @@
 #import "YCFilterSelecterView.h"
 #import "YCChoseBarCollectionView.h"
 
+#import "UIView+BlurBack.h"
+
 @interface YCFilterModule ()<YCFiltersCommonCellDelegate,UICollectionViewDelegate>
 @property (nonatomic,strong) YCFilterSelecterView *flterView;
 @property (nonatomic,strong) YCChoseBarCollectionView *choseBar;
@@ -26,6 +28,7 @@
 {
     self = [super init];
     if (self) {
+        self.backgroundColor = [UIColor darkGrayColor];
         _flterView = ({
             _flterView = [[YCFilterSelecterView alloc] init];
             _flterView.frame = CGRectMake(0, 0, kCollectionViewWidth, kCollectionViewHeight);
@@ -85,6 +88,7 @@
     [UIView animateWithDuration:0.3 animations:^{
         CGFloat h = kCollectionViewHeight + 44;
         self.frame = CGRectMake(0, backFrame.size.height - h, backFrame.size.width, h);
+//        [self setBlurBackgroundWithDarkStyle];
     } completion:^(BOOL finished) {
         _isShowing = YES;
     }];

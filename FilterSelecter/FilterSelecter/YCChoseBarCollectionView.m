@@ -22,7 +22,7 @@
         _iconImageView = ({
             _iconImageView = [[UIImageView  alloc] initWithFrame:self.bounds];
             _iconImageView.contentMode = UIViewContentModeCenter;
-            _iconImageView.backgroundColor = [UIColor blackColor];
+//            _iconImageView.backgroundColor = [UIColor blackColor];
 //            _iconImageView.userInteractionEnabled = YES;
             _iconImageView;
         });
@@ -66,7 +66,7 @@ static NSString *YCChoseBarCellID = @"YCChoseBarCellID";
         self.showsHorizontalScrollIndicator = NO;
         self.dataSource = self;
         //    self.delegate = self;
-//        self.backgroundColor = [UIColor cyanColor];
+        self.backgroundColor = [UIColor clearColor];
         _isFirstShow = YES;
         [self registerClass:[YCChoseBarCell class] forCellWithReuseIdentifier:YCChoseBarCellID];
         UIView *seperatorView = ({
