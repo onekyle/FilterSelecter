@@ -11,9 +11,7 @@
 #define kLevelCount 5
 
 @interface YCBeautyFilterCollectionViewCell ()
-@property (nonatomic,strong) UILabel *titleLabel;
 @property (nonatomic,weak) UIButton *currentSelectedBtn;
-@property (nonatomic,copy) NSString *userDefaultKeyName;
 @end
 
 @implementation YCBeautyFilterCollectionViewCell
@@ -31,15 +29,6 @@
     CGFloat w,h;
     w = frame.size.width;
     h = frame.size.height;
-    _titleLabel = ({
-        CGFloat labelW = 100;
-        UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake((w - labelW) / 2, 10, labelW, 16)];
-        titleLabel.textColor = [UIColor colorWithWhite:1.0 alpha:0.7];
-        titleLabel.font = [UIFont systemFontOfSize:14];
-        titleLabel.textAlignment = NSTextAlignmentCenter;
-        titleLabel;
-    });
-    [self.contentView addSubview:_titleLabel];
     
     CGFloat sideMargin = 15;
     CGFloat btnWH = 50;
@@ -88,7 +77,8 @@
     _currentSelectedBtn.selected = NO;
     sender.selected = YES;
     _currentSelectedBtn = sender;
-    [[NSUserDefaults standardUserDefaults] setInteger:sender.tag forKey:_userDefaultKeyName];
+    [self.delegate didSelectedCommonCellWithType:self.type index:sender.tag forFilterNameKey:_userDefaultKeyName];
+//    [[NSUserDefaults standardUserDefaults] setInteger:sender.tag forKey:_userDefaultKeyName];
 //    NSLog(@"sender: %zd",sender.tag);
 }
 @end

@@ -6,8 +6,7 @@
 //  Copyright © 2016年 com.Durand. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "YCFiltersCommonCell.h"
 
-@interface YCFiltersCollectionViewCell : UICollectionViewCell
-@property (nonatomic,copy) NSDictionary *dataDict;
+@interface YCFiltersCollectionViewCell : YCFiltersCommonCell
 @end

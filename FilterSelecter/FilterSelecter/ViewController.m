@@ -7,9 +7,9 @@
 //
 
 #import "ViewController.h"
-#import "YCFilterSelecterView.h"
+#import "YCFilterModule.h"
 @interface ViewController ()
-@property (nonatomic,strong) YCFilterSelecterView *flterView;
+@property (nonatomic,strong) YCFilterModule *flterView;
 @end
 
 @implementation ViewController
@@ -28,12 +28,11 @@
     });
     
     _flterView = ({
-        UICollectionViewFlowLayout *flowLayout = [UICollectionViewFlowLayout alloc];
-        flowLayout.itemSize = CGSizeMake(kCollectionViewWidth, kCollectionViewHeight);
-        flowLayout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
-        _flterView = [[YCFilterSelecterView alloc] init];
-        _flterView.frame = CGRectMake(0, self.view.frame.size.height - kCollectionViewHeight, kCollectionViewWidth, kCollectionViewHeight);
-        [self.view addSubview:_flterView];
+        _flterView = [[YCFilterModule alloc] init];
+        [_flterView setSelectedCellBlcok:^(YCFiltersType type, NSUInteger index, NSString *key) {
+            NSLog(@"didClickType:%zd, index: %zd, key: %@",type,index,key);
+            [[NSUserDefaults standardUserDefaults] setInteger:index forKey:key];
+        }];
         _flterView;
     });
     
@@ -41,13 +40,21 @@
 
 - (void)showFilter
 {
-    NSArray *array = @[
+    NSArray *filtersArray = @[
                        @{@"CellTitle": @"滤镜", @"userDefaultKeyName": @"LvJing"},
                        @{@"CellTitle": @"嫩肤", @"userDefaultKeyName": @"NenFu"},
                        @{@"CellTitle": @"大眼", @"userDefaultKeyName": @"DaYan"},
                        @{@"CellTitle": @"瘦脸", @"userDefaultKeyName": @"ShouLian"}
                        ];
-    _flterView.dataSourceArray = array;
+    NSArray *choseBarArray = @[
+                               @"lvjing",
+                               @"nenfu",
+                               @"dayan",
+                               @"shoulian",
+                               ];
+    _flterView.filtersViewData = filtersArray;
+    _flterView.choseBarData = choseBarArray;
+    [_flterView showInView:self.view.window];
 }
 
 @end

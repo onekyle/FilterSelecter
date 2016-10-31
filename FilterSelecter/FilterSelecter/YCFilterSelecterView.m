@@ -8,11 +8,11 @@
 
 #import "YCFilterSelecterView.h"
 
+#import "YCFiltersCommonCell.h"
 #import "YCFiltersCollectionViewCell.h"
 #import "YCBeautyFilterCollectionViewCell.h"
 
 
-static NSString *testCellID = @"testCellID";
 static NSString *YCFiltersCollectionviewCellID = @"YCFiltersCollectionviewCellID";
 static NSString *YCBeautyFilterCollectionViewCellID = @"YCBeautyFilterCollectionViewCellID";
 
@@ -37,31 +37,20 @@ static NSString *YCBeautyFilterCollectionViewCellID = @"YCBeautyFilterCollection
     self.dataSource = self;
     self.delegate = self;
     self.backgroundColor = [UIColor darkGrayColor];
-    [self registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:testCellID];
     [self registerClass:[YCFiltersCollectionViewCell class] forCellWithReuseIdentifier:YCFiltersCollectionviewCellID];
     [self registerClass:[YCBeautyFilterCollectionViewCell class] forCellWithReuseIdentifier:YCBeautyFilterCollectionViewCellID];
 
     
     return self;
 }
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect {
-    // Drawing code
-}
-*/
 
 -(void)setDataSourceArray:(NSArray *)dataSourceArray
 {
     _dataSourceArray = dataSourceArray;
     [self reloadData];
 }
+
 #pragma mark -delegate
-//-(void)collectionView:(UICollectionView *)collectionView willDisplayCell:(UICollectionViewCell *)cell forItemAtIndexPath:(NSIndexPath *)indexPath
-//{
-//    
-//}
 
 #pragma mark - datasource
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
@@ -70,14 +59,17 @@ static NSString *YCBeautyFilterCollectionViewCellID = @"YCBeautyFilterCollection
 }
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSString *reuserID = indexPath.item ? YCBeautyFilterCollectionViewCellID : YCFiltersCollectionviewCellID;
-    UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:reuserID forIndexPath:indexPath];
-    if (indexPath.item) {
-        ((YCBeautyFilterCollectionViewCell *) cell).dataDict = _dataSourceArray[indexPath.item];
+    NSInteger index = indexPath.item;
+    NSString *reuserID = index ? YCBeautyFilterCollectionViewCellID : YCFiltersCollectionviewCellID;
+    YCFiltersCommonCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:reuserID forIndexPath:indexPath];
+    cell.delegate = _selectHandler;
+    cell.type = index;
+    if (index) {
+        ((YCBeautyFilterCollectionViewCell *) cell).dataDict = _dataSourceArray[index];
     }
     else
     {
-        ((YCFiltersCollectionViewCell *) cell).dataDict = _dataSourceArray[indexPath.item];
+        ((YCFiltersCollectionViewCell *) cell).dataDict = _dataSourceArray[index];
     }
     return cell;
 }

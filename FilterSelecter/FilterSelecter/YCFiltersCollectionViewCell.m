@@ -30,7 +30,8 @@
         _filterNameLabel = ({
             CGFloat labelH = 30;
             _filterNameLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, frame.size.height - labelH, frame.size.width, labelH)];
-            _filterNameLabel.textColor = [UIColor blackColor];
+            _filterNameLabel.font = [UIFont systemFontOfSize:12];
+            _filterNameLabel.textColor = [UIColor colorWithWhite:1.0 alpha:0.7];
             _filterNameLabel.textAlignment = NSTextAlignmentCenter;
             [self.contentView addSubview:_filterNameLabel];
             _filterNameLabel;
@@ -48,18 +49,18 @@
 {
     [super setSelected:selected];
     if (selected) {
-        _filterIconView.layer.borderColor = [UIColor cyanColor].CGColor;
+        _filterIconView.layer.borderColor = PEACHBLOWCOLOR.CGColor;
         _filterIconView.layer.borderWidth = 3;
         _filterIconView.layer.cornerRadius = 2;
         _filterIconView.layer.masksToBounds = YES;
-        _filterNameLabel.textColor = [UIColor cyanColor];
+        _filterNameLabel.textColor = PEACHBLOWCOLOR;
     }
     else {
         _filterIconView.layer.borderColor = nil;
         _filterIconView.layer.borderWidth = 0;
         _filterIconView.layer.cornerRadius = 0;
         _filterIconView.layer.masksToBounds = NO;
-        _filterNameLabel.textColor = [UIColor blackColor];
+        _filterNameLabel.textColor = [UIColor colorWithWhite:1.0 alpha:0.7];
     }
 }
 
@@ -77,9 +78,8 @@
 
 static NSString *YCSingleFilterCellID = @"YCSingleFilterCellID";
 
-@interface YCFiltersCollectionView : UICollectionView <UICollectionViewDataSource,UICollectionViewDelegate>
+@interface YCFiltersCollectionView : UICollectionView <UICollectionViewDataSource>
 @property (nonatomic,assign) NSUInteger currentIndex;
-@property (nonatomic,copy) NSString *userDefaultKeyName;
 @end
 
 @implementation YCFiltersCollectionView
@@ -88,26 +88,12 @@ static NSString *YCSingleFilterCellID = @"YCSingleFilterCellID";
     self = [super initWithFrame:frame collectionViewLayout:layout];
     if (self) {
         self.dataSource = self;
-        self.delegate = self;
+//        self.delegate = self;
         [self registerClass:[YCSingleFilterCell class] forCellWithReuseIdentifier:YCSingleFilterCellID];
     }
     return self;
 }
 
-#pragma mark -delegate
--(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (indexPath.item == _currentIndex) {
-        return;
-    }
-    UICollectionViewCell *oldCell = [collectionView cellForItemAtIndexPath:[NSIndexPath indexPathForItem:_currentIndex inSection:0]];
-    UICollectionViewCell *currentCell = [collectionView cellForItemAtIndexPath:indexPath];
-    _currentIndex = indexPath.item;
-    currentCell.selected = YES;
-    oldCell.selected = NO;
-    [collectionView scrollToItemAtIndexPath:indexPath atScrollPosition:UICollectionViewScrollPositionCenteredHorizontally animated:YES];
-    [[NSUserDefaults standardUserDefaults] setInteger:indexPath.item forKey:_userDefaultKeyName];
-}
 
 #pragma mark - datasource
 -(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
@@ -125,10 +111,8 @@ static NSString *YCSingleFilterCellID = @"YCSingleFilterCellID";
 
 @end
 
-@interface YCFiltersCollectionViewCell ()
-@property (nonatomic,strong) UILabel *titleLabel;
+@interface YCFiltersCollectionViewCell ()<UICollectionViewDelegate>
 @property (nonatomic,strong) YCFiltersCollectionView *filtesCollectionView;
-@property (nonatomic,copy) NSString *userDefaultKeyName;
 @end
 
 @implementation YCFiltersCollectionViewCell
@@ -141,29 +125,26 @@ static NSString *YCSingleFilterCellID = @"YCSingleFilterCellID";
         CGFloat w,h;
         w = frame.size.width;
         h = frame.size.height;
-        _titleLabel = ({
-            CGFloat labelW = 100;
-            UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake((w - labelW) / 2, 10, labelW, 16)];
-            titleLabel.textColor = [UIColor colorWithWhite:1.0 alpha:0.7];
-            titleLabel.font = [UIFont systemFontOfSize:14];
-            titleLabel.textAlignment = NSTextAlignmentCenter;
-            titleLabel;
+        
+        UICollectionViewFlowLayout *flowLayout = ({
+            flowLayout = [[UICollectionViewFlowLayout alloc]init];;
+            flowLayout.itemSize = CGSizeMake(60, 90);
+            flowLayout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
+            flowLayout.minimumInteritemSpacing = 0;
+            flowLayout.minimumLineSpacing = 5;
+            flowLayout;
         });
-        [self.contentView addSubview:_titleLabel];
         
-        
-        UICollectionViewFlowLayout *flowLayout = [UICollectionViewFlowLayout alloc];
-        flowLayout.itemSize = CGSizeMake(60, 90);
-        flowLayout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
-        flowLayout.minimumInteritemSpacing = 0;
-        flowLayout.minimumLineSpacing = 5;
-        
-        _filtesCollectionView = [[YCFiltersCollectionView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(_titleLabel.frame) + 10, kCollectionViewWidth, 90) collectionViewLayout:flowLayout];
-        _filtesCollectionView.contentInset = UIEdgeInsetsMake(0, 15, 0, 15);
-        _filtesCollectionView.pagingEnabled = NO;
-        _filtesCollectionView.bounces = NO;
-        _filtesCollectionView.showsHorizontalScrollIndicator = NO;
-        _filtesCollectionView.backgroundColor = [UIColor clearColor];
+        _filtesCollectionView = ({
+            _filtesCollectionView = [[YCFiltersCollectionView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(_titleLabel.frame) + 10, kCollectionViewWidth, 90) collectionViewLayout:flowLayout];
+            _filtesCollectionView.contentInset = UIEdgeInsetsMake(0, 15, 0, 15);
+            _filtesCollectionView.pagingEnabled = NO;
+            _filtesCollectionView.bounces = YES;
+            _filtesCollectionView.showsHorizontalScrollIndicator = NO;
+            _filtesCollectionView.backgroundColor = [UIColor clearColor];
+            _filtesCollectionView.delegate = self;
+            _filtesCollectionView;
+        });
         [self.contentView addSubview:_filtesCollectionView];
     }
     return self;
@@ -174,11 +155,30 @@ static NSString *YCSingleFilterCellID = @"YCSingleFilterCellID";
     _dataDict = dataDict;
     _userDefaultKeyName = dataDict[@"userDefaultKeyName"];
     if (_userDefaultKeyName) {
-        _filtesCollectionView.userDefaultKeyName = _userDefaultKeyName;
+//        _filtesCollectionView.userDefaultKeyName = _userDefaultKeyName;
         NSInteger tag = [[NSUserDefaults standardUserDefaults] integerForKey:_userDefaultKeyName];
-        [_filtesCollectionView selectItemAtIndexPath:[NSIndexPath indexPathForItem:tag inSection:0] animated:NO scrollPosition:UICollectionViewScrollPositionNone];
+        NSIndexPath *index = [NSIndexPath indexPathForItem:tag inSection:0];
+        [_filtesCollectionView selectItemAtIndexPath:index animated:NO scrollPosition:UICollectionViewScrollPositionCenteredHorizontally];
     }
     _titleLabel.text = dataDict[@"CellTitle"];
+}
+
+#pragma mark -delegate
+-(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (indexPath.item == _filtesCollectionView.currentIndex) {
+        return;
+    }
+    UICollectionViewCell *oldCell = [collectionView cellForItemAtIndexPath:[NSIndexPath indexPathForItem:_filtesCollectionView.currentIndex inSection:0]];
+    UICollectionViewCell *currentCell = [collectionView cellForItemAtIndexPath:indexPath];
+    _filtesCollectionView.currentIndex = indexPath.item;
+    currentCell.selected = YES;
+    oldCell.selected = NO;
+    [collectionView scrollToItemAtIndexPath:indexPath atScrollPosition:UICollectionViewScrollPositionCenteredHorizontally animated:YES];
+    if (_userDefaultKeyName) {
+        [self.delegate didSelectedCommonCellWithType:self.type index:indexPath.item forFilterNameKey:_userDefaultKeyName];
+//        [[NSUserDefaults standardUserDefaults] setInteger:indexPath.item forKey:_userDefaultKeyName];
+    }
 }
 
 @end

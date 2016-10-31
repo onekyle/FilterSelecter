@@ -8,6 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol YCFiltersCommonCellDelegate;
+
 @interface YCFilterSelecterView : UICollectionView
 @property (nonatomic,copy) NSArray *dataSourceArray;
+@property (nonatomic,weak) id<YCFiltersCommonCellDelegate> selectHandler;
 @end

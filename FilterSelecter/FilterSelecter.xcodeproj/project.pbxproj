@@ -16,6 +16,10 @@
 		13223DC71DBF464100207ADD /* YCFilterSelecterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 13223DC61DBF464100207ADD /* YCFilterSelecterView.m */; };
 		13223DCE1DC04B1B00207ADD /* YCBeautyFilterCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 13223DCD1DC04B1B00207ADD /* YCBeautyFilterCollectionViewCell.m */; };
 		13223DD11DC05A6900207ADD /* YCFiltersCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 13223DD01DC05A6900207ADD /* YCFiltersCollectionViewCell.m */; };
+		13223DF71DC09F3300207ADD /* YCFilterModule.m in Sources */ = {isa = PBXBuildFile; fileRef = 13223DF61DC09F3300207ADD /* YCFilterModule.m */; };
+		13223DFB1DC1D8FD00207ADD /* UIView+BlurBack.m in Sources */ = {isa = PBXBuildFile; fileRef = 13223DFA1DC1D8FD00207ADD /* UIView+BlurBack.m */; };
+		1396E4E51DC2F59B009D98D5 /* YCFiltersCommonCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1396E4E41DC2F59B009D98D5 /* YCFiltersCommonCell.m */; };
+		1396E4E81DC32977009D98D5 /* YCChoseBarCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1396E4E71DC32977009D98D5 /* YCChoseBarCollectionView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +40,14 @@
 		13223DCD1DC04B1B00207ADD /* YCBeautyFilterCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YCBeautyFilterCollectionViewCell.m; sourceTree = "<group>"; };
 		13223DCF1DC05A6900207ADD /* YCFiltersCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YCFiltersCollectionViewCell.h; sourceTree = "<group>"; };
 		13223DD01DC05A6900207ADD /* YCFiltersCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YCFiltersCollectionViewCell.m; sourceTree = "<group>"; };
+		13223DF51DC09F3300207ADD /* YCFilterModule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YCFilterModule.h; sourceTree = "<group>"; };
+		13223DF61DC09F3300207ADD /* YCFilterModule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YCFilterModule.m; sourceTree = "<group>"; };
+		13223DF91DC1D8FD00207ADD /* UIView+BlurBack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+BlurBack.h"; sourceTree = "<group>"; };
+		13223DFA1DC1D8FD00207ADD /* UIView+BlurBack.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+BlurBack.m"; sourceTree = "<group>"; };
+		1396E4E31DC2F59B009D98D5 /* YCFiltersCommonCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YCFiltersCommonCell.h; sourceTree = "<group>"; };
+		1396E4E41DC2F59B009D98D5 /* YCFiltersCommonCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YCFiltersCommonCell.m; sourceTree = "<group>"; };
+		1396E4E61DC32977009D98D5 /* YCChoseBarCollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YCChoseBarCollectionView.h; sourceTree = "<group>"; };
+		1396E4E71DC32977009D98D5 /* YCChoseBarCollectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YCChoseBarCollectionView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -72,12 +84,20 @@
 				13223DAC1DBF411800207ADD /* AppDelegate.m */,
 				13223DAE1DBF411800207ADD /* ViewController.h */,
 				13223DAF1DBF411800207ADD /* ViewController.m */,
+				13223DF51DC09F3300207ADD /* YCFilterModule.h */,
+				13223DF61DC09F3300207ADD /* YCFilterModule.m */,
 				13223DC51DBF464100207ADD /* YCFilterSelecterView.h */,
 				13223DC61DBF464100207ADD /* YCFilterSelecterView.m */,
+				1396E4E61DC32977009D98D5 /* YCChoseBarCollectionView.h */,
+				1396E4E71DC32977009D98D5 /* YCChoseBarCollectionView.m */,
+				1396E4E31DC2F59B009D98D5 /* YCFiltersCommonCell.h */,
+				1396E4E41DC2F59B009D98D5 /* YCFiltersCommonCell.m */,
 				13223DCF1DC05A6900207ADD /* YCFiltersCollectionViewCell.h */,
 				13223DD01DC05A6900207ADD /* YCFiltersCollectionViewCell.m */,
 				13223DCC1DC04B1B00207ADD /* YCBeautyFilterCollectionViewCell.h */,
 				13223DCD1DC04B1B00207ADD /* YCBeautyFilterCollectionViewCell.m */,
+				13223DF91DC1D8FD00207ADD /* UIView+BlurBack.h */,
+				13223DFA1DC1D8FD00207ADD /* UIView+BlurBack.m */,
 				13223DB11DBF411800207ADD /* Main.storyboard */,
 				13223DB41DBF411800207ADD /* Assets.xcassets */,
 				13223DB61DBF411800207ADD /* LaunchScreen.storyboard */,
@@ -167,11 +187,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				13223DF71DC09F3300207ADD /* YCFilterModule.m in Sources */,
+				1396E4E81DC32977009D98D5 /* YCChoseBarCollectionView.m in Sources */,
 				13223DB01DBF411800207ADD /* ViewController.m in Sources */,
 				13223DC71DBF464100207ADD /* YCFilterSelecterView.m in Sources */,
+				1396E4E51DC2F59B009D98D5 /* YCFiltersCommonCell.m in Sources */,
 				13223DD11DC05A6900207ADD /* YCFiltersCollectionViewCell.m in Sources */,
 				13223DAD1DBF411800207ADD /* AppDelegate.m in Sources */,
 				13223DCE1DC04B1B00207ADD /* YCBeautyFilterCollectionViewCell.m in Sources */,
+				13223DFB1DC1D8FD00207ADD /* UIView+BlurBack.m in Sources */,
 				13223DAA1DBF411800207ADD /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
