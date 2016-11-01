@@ -28,10 +28,9 @@
 {
     self = [super init];
     if (self) {
-        self.backgroundColor = [UIColor darkGrayColor];
         _flterView = ({
             _flterView = [[YCFilterSelecterView alloc] init];
-            _flterView.frame = CGRectMake(0, 0, kCollectionViewWidth, kCollectionViewHeight);
+            _flterView.frame = CGRectMake(0, 0, kYCFilterSelecterViewWidth, kYCFilterSelecterViewHeight);
             _flterView.selectHandler = self;
             _flterView.delegate = self;
             _flterView;
@@ -39,7 +38,7 @@
         [self addSubview:_flterView];
         
         _choseBar = ({
-            _choseBar = [[YCChoseBarCollectionView alloc] initWithFrame:CGRectMake(0, kCollectionViewHeight, kCollectionViewWidth, 44)];
+            _choseBar = [[YCChoseBarCollectionView alloc] initWithFrame:CGRectMake(0, kYCFilterSelecterViewHeight, kYCFilterSelecterViewWidth, kChoseBarViewHeight)];
             _choseBar.delegate = self;
             _choseBar;
         });
@@ -86,9 +85,9 @@
     }
     
     [UIView animateWithDuration:0.3 animations:^{
-        CGFloat h = kCollectionViewHeight + 44;
+        CGFloat h = kYCFilterSelecterViewHeight + kChoseBarViewHeight;
         self.frame = CGRectMake(0, backFrame.size.height - h, backFrame.size.width, h);
-//        [self setBlurBackgroundWithDarkStyle];
+        [self setBlurBackgroundWithDarkStyle];
     } completion:^(BOOL finished) {
         _isShowing = YES;
     }];
@@ -113,9 +112,13 @@
 #pragma mark YCFiltersCommonCellDelegate
 -(void)didSelectedCommonCellWithType:(YCFiltersType)type index:(NSUInteger)index forFilterNameKey:(NSString *)key
 {
-    if (_selectedCellBlcok) {
-        _selectedCellBlcok(type,index,key);
-    }
+//    if (_selectedCellBlcok) {
+//        _selectedCellBlcok(type,index,key);
+//    }
+//    else
+//    {
+        [self.delegate didSelectedFiltesWithType:type index:index forFilterNameKey:key];
+//    }
 }
 
 #pragma mark CollectionViewDelegate

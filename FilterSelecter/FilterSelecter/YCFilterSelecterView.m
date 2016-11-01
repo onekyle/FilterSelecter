@@ -24,7 +24,7 @@ static NSString *YCBeautyFilterCollectionViewCellID = @"YCBeautyFilterCollection
 - (instancetype)init
 {
     UICollectionViewFlowLayout *flowLayout = [UICollectionViewFlowLayout alloc];
-    flowLayout.itemSize = CGSizeMake(kCollectionViewWidth, kCollectionViewHeight);
+    flowLayout.itemSize = CGSizeMake(kYCFilterSelecterViewWidth, kYCFilterSelecterViewWidth);
     flowLayout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
     flowLayout.minimumInteritemSpacing = 0;
     flowLayout.minimumLineSpacing = 0;

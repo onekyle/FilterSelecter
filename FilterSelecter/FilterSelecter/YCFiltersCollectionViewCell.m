@@ -10,7 +10,8 @@
 
 @interface YCSingleFilterCell : UICollectionViewCell
 @property (nonatomic,copy) NSString *filterName;
-@property (nonatomic,strong) UIView *filterIconView;
+@property (nonatomic,copy) NSString *filterIconName;
+@property (nonatomic,strong) UIImageView *filterIconView;
 @property (nonatomic,strong) UILabel *filterNameLabel;
 @end
 
@@ -21,11 +22,12 @@
     if (self) {
         
         _filterIconView = ({
-            _filterIconView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, frame.size.width, kFilterCollectionViewCellSize)];
-            _filterIconView.backgroundColor = [self randomColor];
-            [self.contentView addSubview:_filterIconView];
+            _filterIconView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, frame.size.width, kFilterCollectionViewCellSize)];
+//            _filterIconView.backgroundColor = [self randomColor];
+            _filterIconView.contentMode = UIViewContentModeScaleAspectFit;
             _filterIconView;
         });
+        [self.contentView addSubview:_filterIconView];
         
         _filterNameLabel = ({
             CGFloat labelH = 30;
@@ -33,9 +35,9 @@
             _filterNameLabel.font = [UIFont systemFontOfSize:12];
             _filterNameLabel.textColor = [UIColor colorWithWhite:1.0 alpha:0.7];
             _filterNameLabel.textAlignment = NSTextAlignmentCenter;
-            [self.contentView addSubview:_filterNameLabel];
             _filterNameLabel;
         });
+        [self.contentView addSubview:_filterNameLabel];
     }
     return self;
 }
@@ -43,6 +45,11 @@
 -(void)setFilterName:(NSString *)filterName
 {
     _filterNameLabel.text = filterName;
+}
+
+-(void)setFilterIconName:(NSString *)filterIconName
+{
+    _filterIconView.image = [UIImage imageNamed:filterIconName];
 }
 
 -(void)setSelected:(BOOL)selected
@@ -80,6 +87,8 @@ static NSString *YCSingleFilterCellID = @"YCSingleFilterCellID";
 
 @interface YCFiltersCollectionView : UICollectionView <UICollectionViewDataSource>
 @property (nonatomic,assign) NSUInteger currentIndex;
+@property (nonatomic,copy) NSArray *sonCellTitles;
+@property (nonatomic,copy) NSArray *sonCellImageNames;
 @end
 
 @implementation YCFiltersCollectionView
@@ -94,17 +103,26 @@ static NSString *YCSingleFilterCellID = @"YCSingleFilterCellID";
     return self;
 }
 
+-(void)setSonCellTitles:(NSArray *)sonCellTitles
+{
+    _sonCellTitles = sonCellTitles;
+    [self reloadData];
+}
+
 
 #pragma mark - datasource
 -(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    return 20;
+    return _sonCellTitles.count;
 }
 
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     YCSingleFilterCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:YCSingleFilterCellID forIndexPath:indexPath];
-    cell.filterName = [NSString stringWithFormat:@"第%zd个",indexPath.item];
+    NSInteger item = indexPath.item;
+    cell.filterName = _sonCellTitles[item];
+    cell.filterIconName = _sonCellImageNames[item];
+    
     return cell;
 }
 
@@ -136,7 +154,7 @@ static NSString *YCSingleFilterCellID = @"YCSingleFilterCellID";
         });
         
         _filtesCollectionView = ({
-            _filtesCollectionView = [[YCFiltersCollectionView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(_titleLabel.frame) + 10, kCollectionViewWidth, 90) collectionViewLayout:flowLayout];
+            _filtesCollectionView = [[YCFiltersCollectionView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(_titleLabel.frame) + 10, kYCFilterSelecterViewWidth, 90) collectionViewLayout:flowLayout];
             _filtesCollectionView.contentInset = UIEdgeInsetsMake(0, 15, 0, 15);
             _filtesCollectionView.pagingEnabled = NO;
             _filtesCollectionView.bounces = YES;
@@ -154,6 +172,8 @@ static NSString *YCSingleFilterCellID = @"YCSingleFilterCellID";
 {
     _dataDict = dataDict;
     _userDefaultKeyName = dataDict[@"userDefaultKeyName"];
+    _filtesCollectionView.sonCellTitles = dataDict[@"sonCellTitles"];
+    _filtesCollectionView.sonCellImageNames = dataDict[@"sonCellImageNames"];
     if (_userDefaultKeyName) {
 //        _filtesCollectionView.userDefaultKeyName = _userDefaultKeyName;
         NSInteger tag = [[NSUserDefaults standardUserDefaults] integerForKey:_userDefaultKeyName];
@@ -161,6 +181,7 @@ static NSString *YCSingleFilterCellID = @"YCSingleFilterCellID";
         [_filtesCollectionView selectItemAtIndexPath:index animated:NO scrollPosition:UICollectionViewScrollPositionCenteredHorizontally];
     }
     _titleLabel.text = dataDict[@"CellTitle"];
+    
 }
 
 #pragma mark -delegate

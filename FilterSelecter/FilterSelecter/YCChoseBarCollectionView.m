@@ -22,7 +22,7 @@
         _iconImageView = ({
             _iconImageView = [[UIImageView  alloc] initWithFrame:self.bounds];
             _iconImageView.contentMode = UIViewContentModeCenter;
-//            _iconImageView.backgroundColor = [UIColor blackColor];
+//            _iconImageView.backgroundColor = [UIColor clearColor];
 //            _iconImageView.userInteractionEnabled = YES;
             _iconImageView;
         });

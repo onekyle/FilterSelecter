@@ -8,6 +8,13 @@
 
 #import <UIKit/UIKit.h>
 
+// YCFilterSelecter
+#define kYCFilterSelecterViewWidth ([UIScreen mainScreen].bounds.size.width)
+#define kYCFilterSelecterViewHeight (130)
+#define kChoseBarViewHeight (49)
+#define kFilterCollectionViewCellSize (60)
+#define PEACHBLOWCOLOR [UIColor colorWithRed:253/255.0 green:70/255.0 blue:110/255.0 alpha:1]
+
 typedef NS_ENUM(NSUInteger, YCFiltersType) {
     YCFiltersTypeLvJing, // 滤镜
     YCFiltersTypeNenFu, // 嫩肤

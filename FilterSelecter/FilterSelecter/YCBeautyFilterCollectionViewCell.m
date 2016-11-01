@@ -63,8 +63,10 @@
     _userDefaultKeyName = dataDict[@"userDefaultKeyName"];
     if (_userDefaultKeyName) {
         NSInteger tag = [[NSUserDefaults standardUserDefaults] integerForKey:_userDefaultKeyName];
-        tag = tag ? tag : 1000;
+        tag = tag + 1000;
         UIButton *btn = [self.contentView viewWithTag:tag];
+//        [self changeBtnSelectedStatusTo:NO button:_currentSelectedBtn];
+//        [self changeBtnSelectedStatusTo:YES button:btn];
         _currentSelectedBtn.selected = NO;
         btn.selected = YES;
         _currentSelectedBtn = btn;
@@ -72,16 +74,23 @@
     _titleLabel.text = dataDict[@"CellTitle"];
 }
 
+//-(void)changeBtnSelectedStatusTo:(BOOL)selected button:(UIButton *)btn
+//{
+//    btn.selected = selected;
+//    btn.backgroundColor = selected ? _btnSelectedColor : [UIColor clearColor];
+//}
 
 -(void)didClickBeutyFilter:(UIButton *)sender
 {
     if ([_currentSelectedBtn isEqual:sender]) {
         return;
     }
+//    [self changeBtnSelectedStatusTo:NO button:_currentSelectedBtn];
+//    [self changeBtnSelectedStatusTo:YES button:sender];
     _currentSelectedBtn.selected = NO;
     sender.selected = YES;
     _currentSelectedBtn = sender;
-    [self.delegate didSelectedCommonCellWithType:self.type index:sender.tag forFilterNameKey:_userDefaultKeyName];
+    [self.delegate didSelectedCommonCellWithType:self.type index:(sender.tag - 1000) forFilterNameKey:_userDefaultKeyName];
 //    [[NSUserDefaults standardUserDefaults] setInteger:sender.tag forKey:_userDefaultKeyName];
 //    NSLog(@"sender: %zd",sender.tag);
 }
