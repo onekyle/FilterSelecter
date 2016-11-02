@@ -20,6 +20,8 @@
 @property (nonatomic,copy) NSArray *filtersViewData;
 @property (nonatomic,copy) NSArray *choseBarData;
 
+@property (nonatomic,strong) UIControl *backControl;
+
 @property (nonatomic,copy) void(^selectedCellBlcok)(YCFiltersType type,NSUInteger index,NSString *key);
 
 -(void)showInView:(UIView *)backView;

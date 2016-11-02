@@ -13,12 +13,14 @@
 
 #import "UIView+BlurBack.h"
 
+
 @interface YCFilterModule ()<YCFiltersCommonCellDelegate,UICollectionViewDelegate>
 @property (nonatomic,strong) YCFilterSelecterView *flterView;
 @property (nonatomic,strong) YCChoseBarCollectionView *choseBar;
-@property (nonatomic,strong) UIControl *backControl;
 @property (nonatomic,assign) BOOL isShowing;
 @property (nonatomic,strong) NSIndexPath *indexPathOfCentralCell;
+@property (nonatomic,strong) NSIndexPath *currentChoseBarSelectedIndexPath;
+
 
 @end
 
@@ -112,6 +114,7 @@
 #pragma mark YCFiltersCommonCellDelegate
 -(void)didSelectedCommonCellWithType:(YCFiltersType)type index:(NSUInteger)index forFilterNameKey:(NSString *)key
 {
+    // 暂时不使用block
 //    if (_selectedCellBlcok) {
 //        _selectedCellBlcok(type,index,key);
 //    }
@@ -122,10 +125,22 @@
 }
 
 #pragma mark CollectionViewDelegate
+
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
     if ([collectionView isEqual:_choseBar]) {
+        if ([_currentChoseBarSelectedIndexPath isEqual:indexPath]) {
+            return;
+        }
+        _currentChoseBarSelectedIndexPath = indexPath;
+        _flterView.alpha = 0.3;
+        [UIView animateWithDuration:0.3 delay:0 options:UIViewAnimationOptionCurveEaseIn animations:^{
+            _flterView.alpha = 1.0;
+        } completion:nil];
         [_flterView selectItemAtIndexPath:indexPath animated:NO scrollPosition:UICollectionViewScrollPositionCenteredHorizontally];
+//        [UIView animateWithDuration:0.5 animations:^{
+//            cell.alpha = 1.0;
+//        }];
     }
 }
 
@@ -141,6 +156,7 @@
 {
     if ([scrollView isEqual:_flterView] ) {
         [_choseBar selectItemAtIndexPath:_indexPathOfCentralCell animated:YES scrollPosition:UICollectionViewScrollPositionCenteredHorizontally];
+        _currentChoseBarSelectedIndexPath = _indexPathOfCentralCell;
     }
 }
 
